@@ -8,11 +8,20 @@
   (:init
     (moisture-low plot1)
     (water-available)
+
+    (pest-present plot1)
+    (pesticide-available)
   )
 
+  ; (:goal
+  ;   (and
+  ;     (moisture-ok plot1)
+  ;     (treated plot1)
+  ;   )
+  ; )
   (:goal
     (and
-      (moisture-ok plot1)
+      (pest-absent plot1)
       (treated plot1)
     )
   )

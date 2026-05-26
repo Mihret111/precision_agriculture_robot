@@ -13,8 +13,14 @@
     (needs-water ?p - plot)
     (water-available)
     (treated ?p - plot)
+
+    (pest-present ?p - plot)
+    (pest-absent ?p - plot)
+    (needs-pesticide ?p - plot)
+    (pesticide-available)
   )
 
+  ; Inspection actions
   (:action inspect-plot
     :parameters (?p - plot)
     :precondition
@@ -22,7 +28,7 @@
     :effect
       (inspected ?p)
   )
-
+  ; Water-related actions
   (:action diagnose-water-need
     :parameters (?p - plot)
     :precondition
@@ -52,4 +58,33 @@
       )
   )
 
+  ;  Pesticide-related actions
+  (:action diagnose-pesticide-need
+    :parameters (?p - plot)
+    :precondition
+      (and
+        (inspected ?p)
+        (pest-present ?p)
+        (not (needs-pesticide ?p))
+      )
+    :effect
+      (needs-pesticide ?p)
+  )
+
+  (:action spray-pesticide
+    :parameters (?p - plot)
+    :precondition
+      (and
+        (needs-pesticide ?p)
+        (pesticide-available)
+      )
+    :effect
+      (and
+        (not (pest-present ?p))
+        (pest-absent ?p)
+        (not (needs-pesticide ?p))
+        (not (pesticide-available))
+        (treated ?p)
+      )
+  )
 )
