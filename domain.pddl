@@ -178,7 +178,11 @@
         (inspected ?p)
         (moisture-ok ?p)
         (pest-absent ?p)
+        (nutrient-ok ?p)
         (health-good ?p)
+        (watered ?p)
+        (sprayed ?p)
+        (fertilized ?p)
       )
     :effect
       (reported ?p)
