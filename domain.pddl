@@ -26,6 +26,13 @@
     (health-good ?p - plot)
     (health-stressed ?p - plot)
     (reported ?p - plot)
+
+  ; Nutrient status predicates
+    (nutrient-low ?p - plot)
+    (nutrient-ok ?p - plot)
+    (needs-fertilizer ?p - plot)
+    (fertilizer-available)
+    (fertilized ?p - plot)
   )
 
   ; Inspection actions
@@ -115,7 +122,55 @@
         (health-stressed ?p)
       )
   )
+  ; Fertilizer-related actions
+  (:action diagnose-fertilizer-need
+    :parameters (?p - plot)
+    :precondition
+      (and
+        (inspected ?p)
+        (nutrient-low ?p)
+        (not (needs-fertilizer ?p))
+      )
+    :effect
+      (needs-fertilizer ?p)
+  )
 
+  (:action fertilize-plot
+    :parameters (?p - plot)
+    :precondition
+      (and
+        (needs-fertilizer ?p)
+        (fertilizer-available)
+      )
+    :effect
+      (and
+        (not (nutrient-low ?p))
+        (nutrient-ok ?p)
+        (not (needs-fertilizer ?p))
+        (not (fertilizer-available))
+        (fertilized ?p)
+      )
+  )
+
+    (:action blind-fertilize-plot
+      :parameters (?p - plot)
+      :precondition
+        (and
+          (inspected ?p)
+          (fertilizer-available)
+          (not (needs-fertilizer ?p))
+        )
+      :effect
+        (and
+          (nutrient-ok ?p)
+          (not (fertilizer-available))
+          (fertilized ?p)
+          (not (health-good ?p))
+          (health-stressed ?p)
+        )
+    )
+
+  ; Status reporting action
   (:action report-plot-status
     :parameters (?p - plot)
     :precondition
@@ -128,4 +183,5 @@
     :effect
       (reported ?p)
   )
+
 )
