@@ -41,7 +41,14 @@
 
   (:goal
     (and
-      (inspected plot1)
+      ; (moisture-ok plot1)
+      ; (watered plot1)
+      
+      ; (pest-absent plot1)
+      ; (sprayed plot1)
+      
+      (nutrient-ok plot1)
+      (fertilized plot1)
     )
   )
 )
