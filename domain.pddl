@@ -196,6 +196,26 @@
         (decrease (fertilizer-level ?r) 1)
         (decrease (battery-level ?r) (fertilize-energy-cost))
       )
+  )
+
+  ; report final plot status after all treatments are done, no energy cost
+  (:action report-plot-status
+  :parameters (?r - robot ?p - plot ?w - waypoint)
+  :precondition
+    (and
+      (at ?r ?w)
+      (plot-at ?p ?w)
+      (inspected ?p)
+      (moisture-ok ?p)
+      (pest-absent ?p)
+      (nutrient-ok ?p)
+      (watered ?p)
+      (sprayed ?p)
+      (fertilized ?p)
+      (not (reported ?p))
+    )
+  :effect
+    (reported ?p)
 )
 
 )
