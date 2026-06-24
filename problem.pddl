@@ -18,26 +18,30 @@
     ;; plot location
     (plot-at plot1 wp-plot)
 
-    ;; initial plot condition
-    (moisture-low plot1)
-    (pest-present plot1)
-    (nutrient-low plot1)
-    (health-good plot1)
+    (at robot1 wp-base)
 
-    ;; initial numeric resources
-    (= (battery-level robot1) 10)
-    (= (water-level robot1) 2)
-    (= (fertilizer-level robot1) 2)
-    (= (pesticide-level robot1) 2)
+    (refill-water-at wp-base)
+    (refill-fertilizer-at wp-base)
+    (refill-pesticide-at wp-base)
+    (refill-growth-support-at wp-base)
 
-    ;; action costs
-    (= (move-energy-cost wp-base wp-plot) 2)
-    (= (move-energy-cost wp-plot wp-base) 2)
-    (= (inspect-energy-cost) 1)
-    (= (water-energy-cost) 1)
-    (= (fertilize-energy-cost) 1)
-    (= (spray-energy-cost) 1)
+    (= (water-level robot1) 0)
+    (= (fertilizer-level robot1) 0)
+    (= (pesticide-level robot1) 0)
+    (= (growth-support-level robot1) 0)
+
+    (= (water-capacity robot1) 3)
+    (= (fertilizer-capacity robot1) 2)
+    (= (pesticide-capacity robot1) 2)
+    (= (growth-support-capacity robot1) 2)
+
+    ;; include battery if your domain requires function initialization globally
+    (= (battery-level robot1) 18)
+    (= (battery-capacity robot1) 18)
   )
+
+
+  
 
   (:goal
     (and
@@ -47,7 +51,18 @@
       ; (watered plot1)
       ; (sprayed plot1)
       ; (fertilized plot1)
-      (reported plot1)
+      ;(needs-fertilizer plot1)
+
+      ; (reported plot1)
+
+      ; (>= (battery-level robot1) 18)
+      ; (>= (water-level robot1) 3)
+
+      (>= (water-level robot1) 3)
+      (>= (fertilizer-level robot1) 2)
+      (>= (pesticide-level robot1) 2)
+      (>= (growth-support-level robot1) 2)
+
     )
-  )
+    )
 )
