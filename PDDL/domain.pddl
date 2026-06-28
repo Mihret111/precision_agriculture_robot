@@ -121,11 +121,8 @@
 
   ;; ------------------------------------------------------------
   ;; Task-directed navigation
-  ;; ------------------------------------------------------------
   ;; There is intentionally no generic free-roaming move action.
   ;; A free robot travels because it is opening a concrete plot case.
-  ;; This avoids meaningless waypoint oscillations in the high-level
-  ;; agricultural planning model.
 
   (:action travel-to-plot-and-inspect
     :parameters (?r - robot ?p - plot ?from - waypoint ?to - waypoint)
@@ -333,8 +330,6 @@
 
   ;; ------------------------------------------------------------
   ;; Diagnosis-authorized targeted interventions
-  ;; ------------------------------------------------------------
-
   (:action water-plot
     :parameters (?r - robot ?p - plot ?w - waypoint)
     :precondition
@@ -458,7 +453,7 @@
   )
 
   ;; Explicit harmful side-effect actions, used to show that inappropriate
-  ;; intervention is representable but should not be selected in valid safe plans.
+  ;; intervention is representable but should not be selected in valid safe plans
 
   (:action unsafe-water-not-needed
     :parameters (?r - robot ?p - plot ?w - waypoint)
@@ -512,7 +507,6 @@
 
   ;; ------------------------------------------------------------
   ;; Reporting closes the plot case
-  ;; ------------------------------------------------------------
 
   (:action report-plot-status
     :parameters (?r - robot ?p - plot ?w - waypoint)
@@ -548,7 +542,6 @@
 
   ;; ------------------------------------------------------------
   ;; Depot service and same-case service recovery
-  ;; ------------------------------------------------------------
 
   (:action recharge-battery
     :parameters (?r - robot ?w - waypoint)

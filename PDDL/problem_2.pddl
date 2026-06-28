@@ -10,26 +10,14 @@
   (:init
     ;; ------------------------------------------------------------------
     ;; Robot start and operating mode
-    ;; ------------------------------------------------------------------
     ;; The robot starts at the depot. The depot is the service location
     ;; where charging and all liquid/solid treatment resources are available.
     (at robot1 wp-depot)
     (mobile robot1)
     (free robot1)
 
-    ;; ------------------------------------------------------------------
-    ;; Field map / high-level route abstraction
-    ;; ------------------------------------------------------------------
-    ;; Neutral location names are used so the waypoint names do not reveal
-    ;; whether a plot is dry, pest-infested, nutrient deficient, or healthy.
-    ;;
-    ;; Conceptual map:
-    ;;
     ;;   wp-depot --2-- wp-row1 --2-- wp-row2 --2-- wp-row3 --2-- wp-row4
     ;;
-    ;; Additional direct route abstractions are included with costs equal to
-    ;; the shortest headland/field-lane distance between the locations. These
-    ;; are not crop-condition facts; they are only travel-cost information.
 
     (adjacent wp-depot wp-row1)
     (adjacent wp-row1 wp-depot)
@@ -42,8 +30,7 @@
     (adjacent wp-row4 wp-row3)
 
 
-    ;; Plot locations. The plot number is only an identifier; the condition
-    ;; predicates below define what is actually wrong or healthy on each plot.
+    ;; Plot locations. 
     (plot-at plot1 wp-row1)
     (plot-at plot2 wp-row2)
     (plot-at plot3 wp-row3)
@@ -58,10 +45,6 @@
 
     ;; ------------------------------------------------------------------
     ;; Underlying plot conditions
-    ;; ------------------------------------------------------------------
-    ;; These are the true field conditions in the planning instance. The robot
-    ;; still has to inspect, observe, and diagnose before intervention actions
-    ;; become authorized.
 
     ;; plot1: water issue only
     (moisture-low plot1)
@@ -96,8 +79,7 @@
     (soil-quality-good plot4)
 
     ;; ------------------------------------------------------------------
-    ;; Initial battery/resources: mission preparation is meaningful
-    ;; ------------------------------------------------------------------
+    ;; Initial battery/resources: 
     (= (battery-level robot1) 10)
     (= (water-level robot1) 0)
     (= (fertilizer-level robot1) 0)
@@ -115,7 +97,6 @@
 
     ;; ------------------------------------------------------------------
     ;; High-level route energy costs
-    ;; ------------------------------------------------------------------
     ;; Costs encode relative distance from the depot and between rows.
     ;; One physically adjacent step costs 2 energy units.
     (= (move-energy-cost wp-depot wp-row1) 2)

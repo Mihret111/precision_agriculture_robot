@@ -21,14 +21,13 @@
     ;; ------------------------------------------------------------------
     ;; Field map / route abstraction
     ;; ------------------------------------------------------------------
-    ;; Conceptual map:
+    ;; map:
     ;;
     ;;   wp-depot --2-- wp-entry --2-- wp-row1 --2-- wp-row2 --2-- wp-row3
     ;;
     ;; The robot can only open a plot case at an adjacent row workspace.
     ;; Therefore, starting from wp-entry, it must assess row1 before it can
-    ;; progress to row2, and then row3. This represents scouting along a
-    ;; row corridor without naming a waypoint after the crop problem.
+    ;; progress to row2, and then row3. 
     (adjacent wp-depot wp-entry)
     (adjacent wp-entry wp-depot)
 
@@ -55,7 +54,6 @@
 
     ;; ------------------------------------------------------------------
     ;; Underlying plot conditions: one localized issue in the corridor
-    ;; ------------------------------------------------------------------
     ;; plot1 and plot2 are healthy rows discovered during scouting.
     (moisture-ok plot1)
     (pest-absent plot1)
@@ -83,11 +81,9 @@
 
     ;; ------------------------------------------------------------------
     ;; Initial battery/resources
-    ;; ------------------------------------------------------------------
     ;; The robot is already deployed away from the depot, but it starts
     ;; prepared enough to complete this clean scouting/intervention case
-    ;; without service recovery. Service recovery is demonstrated separately
-    ;; in Problem 3.
+    ;; without service recovery. 
     (= (battery-level robot1) 50)
     (= (water-level robot1) 1)
     (= (fertilizer-level robot1) 1)

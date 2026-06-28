@@ -8,15 +8,10 @@
   )
 
   (:init
-    ;; Robot starts at a field-entry waypoint, not at the depot.
-    ;; This represents a mid-mission situation where the robot discovers
-    ;; a plot-level problem while not carrying the required treatment resource.
     (at robot1 wp-entry)
     (mobile robot1)
     (free robot1)
 
-    ;; Simple service-recovery map:
-    ;; wp-entry --2-- wp-row1 --2-- wp-depot
     ;; plot1 is at row1; recharge/refill are available only at the depot.
     (adjacent wp-entry wp-row1)
     (adjacent wp-row1 wp-depot)
